@@ -10,7 +10,7 @@ import * as THREE from 'three'
 import { InspectionPopup } from './InspectionPopup' // Importer le composant InspectionPopup
 
 export function Trafic(props) {
-  const { nodes, materials } = useGLTF('/models/renault-trafic-van.clean.glb')
+  const { nodes, materials } = useGLTF(`${import.meta.env.BASE_URL}models/renault-trafic-van.clean.glb`)
   const [selectedObject, setSelectedObject] = useState(null)
   const [objectStatus, setObjectStatus] = useState({}) // État pour stocker le statut et les commentaires des objets
   const raycaster = useRef(new THREE.Raycaster())
@@ -788,4 +788,4 @@ export function Trafic(props) {
     </>
   )
 }
-useGLTF.preload('/models/renault-trafic-van.clean.glb')
+useGLTF.preload(`${import.meta.env.BASE_URL}models/renault-trafic-van.clean.glb`)
