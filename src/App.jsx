@@ -1,14 +1,31 @@
+import React, { useState, useEffect } from 'react';
 import { Canvas } from "@react-three/fiber";
 import { OrbitControls } from "@react-three/drei";
 import { Experience } from "./components/Experience";
 import "./App.css";
 
 const App = () => {
+  const [isPortrait, setIsPortrait] = useState(window.innerHeight > window.innerWidth);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsPortrait(window.innerHeight > window.innerWidth);
+    };
+
+    window.addEventListener('resize', handleResize);
+    window.addEventListener('orientationchange', handleResize);
+
+    return () => {
+      window.removeEventListener('resize', handleResize);
+      window.removeEventListener('orientationchange', handleResize);
+    };
+  }, []);
+
   return (
     <Canvas
       camera={{
-        fov: 70,
-        position: [-5, 2, 0],
+        fov: isPortrait ? 90 : 70,
+        position: isPortrait ? [-6, 3, 2] : [-5, 2, 0],
       }}
     >
       <OrbitControls
